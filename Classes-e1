@@ -1,0 +1,104 @@
+#include <iostream>
+using namespace std;
+
+
+class Employee{
+public:
+    string name;
+    string surName;
+    int idNumber;
+    int age;
+
+    Employee(){};
+    Employee(string s1,string s2, int i1, int i2 ){
+        name = s1;
+        surName = s2;
+        idNumber = i1;
+        age = i2;
+    }
+    void printEmployee(){
+        cout << idNumber << endl;
+        cout << name << endl;
+        cout << surName << endl;
+
+
+    }
+};
+
+class Company{
+
+public:
+    string companyName;
+    Employee employee[8];
+
+    int employeeCount;
+
+
+
+    Company(){
+        employeeCount = 0;
+    }
+
+    void addEmployee(){
+
+        string name,surName;
+        int idNumber,age;
+
+        cin >> name;
+        cin >> surName;
+        cin >> idNumber;
+        cin >> age;
+        employee[employeeCount] = Employee(name,surName,idNumber,age);
+        employeeCount++;
+
+
+
+    }
+    string findYoungestEmployee(){
+        int minAge = 999;
+        int minAgeIndex;
+        string result;
+        for(int i= 0; i<employeeCount ;i++) {
+            if(employee[i].age < minAge){
+                minAge =  employee[i].age;
+                result = employee[i].name;
+            }
+
+        }
+
+        return result;
+    }
+
+
+    string findOldestEmployee(){
+        int maxAge = 0;
+        string result;
+        int i;
+        for( i= 0; i<employeeCount ;i++) {
+            if(employee[i].age > maxAge){
+                maxAge =  employee[i].age;
+                result = employee[i].name;
+            }
+        }
+
+        return result;
+    }
+
+
+};
+
+
+
+int main() {
+    Company google;
+
+
+    for(int i= 0; i<8;i++) {
+        google.addEmployee();
+    }
+
+    cout << google.findYoungestEmployee() << endl;
+    cout << google.findOldestEmployee() << endl;
+
+    return 0;
+}
